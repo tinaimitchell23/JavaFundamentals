@@ -1,5 +1,5 @@
 package com.fundamentals.java;
-
+import java.util.Scanner;
 /*
 *public - Access Modifier
 *class - file type
@@ -11,19 +11,21 @@ public class WelcomeToJava {
 		// TODO Auto-generated method stub
 	// someMethod();
 	// stringExamples();
-	moreStringExamples();
+	// moreStringExamples();
+		scannerExample();
+		
+	
 	}
 	public static void someMethod() {
-//This is a single comment
-/*
- * This
- * is a multi-line
- * comment
- * */
-System.out.println("Welcome to Java");
+		//This is a single comment
+		/*
+		 * This
+		 * is a multi-line
+		 * comment
+		 * */
+		System.out.println("Welcome to Java");
 
 }
-
 
 	public static void stringExamples() {
 		// String = Type | str1 = variable name | Welcome = string literal
@@ -46,6 +48,7 @@ System.out.println("Welcome to Java");
 		String mySecondString = str2.toUpperCase();
 		System.out.println(mySecondString);
 	}
+	
 	public static void moreStringExamples() {
 		String myString = "My Java String";
 		// Are these equal?
@@ -65,4 +68,27 @@ System.out.println("Welcome to Java");
 		
 	}
 	
+	public static void dataTypeExamples() {
+		PrimitiveExamples pe = new PrimitiveExamples ();
+		pe.myFirstPrimitiveMethod();
+		pe.myAddition();
+		pe.mySubtraction();
+		pe.myMultiplication();
+		pe.myDivision();
+		pe.myModulus();
+		pe.myOrderOp();
+	}
+	
+	// Example of the use of Scanner
+	public static void scannerExample() {
+	int x, y, z;
+	System.out.println("Enter two integers");
+	Scanner in = new Scanner(System.in);
+	x = in.nextInt();
+	y = in.nextInt();
+	z = x + y;
+	System.out.println("Sum of entered integers =" + z);
+	}
 }
+
+
