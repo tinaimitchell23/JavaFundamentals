@@ -12,9 +12,31 @@ public class WelcomeToJava {
 	// someMethod();
 	// stringExamples();
 	// moreStringExamples();
-		scannerExample();
-		
+	// scannerExample();
+	// myOperatorExample();
+	myAssignmentExample();
+		}
 	
+	public static void myAssignmentExample() {
+		AssignmentExample ae = new AssignmentExample();
+		ae.plusEqualsExample();
+		ae.minusEqualsExample();
+		ae.multiplyEqualsExample();
+		ae.divisionEqualsExample();
+		ae.modulusEqualsExample();
+		ae.leftShiftEqualsExample();
+		ae.rightShiftEqualsExample();
+		ae.bitwiseAndEqualsExample();
+		ae.bitwiseOrEqualsExample();
+	}
+	
+	public static void myOperatorExample() {
+		OperatorExamples oe = new OperatorExamples ();
+		oe.incrementSample();
+		oe.decrementSample();
+		oe.equalsExample();
+		oe.equalsExample2();
+		oe.logicalExample();
 	}
 	public static void someMethod() {
 		//This is a single comment
@@ -69,7 +91,7 @@ public class WelcomeToJava {
 	}
 	
 	public static void dataTypeExamples() {
-		PrimitiveExamples pe = new PrimitiveExamples ();
+		PrimitiveExamples pe = new PrimitiveExamples();
 		pe.myFirstPrimitiveMethod();
 		pe.myAddition();
 		pe.mySubtraction();
