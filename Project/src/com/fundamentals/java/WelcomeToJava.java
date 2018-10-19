@@ -14,9 +14,17 @@ public class WelcomeToJava {
 	// moreStringExamples();
 	// scannerExample();
 	// myOperatorExample();
-	myAssignmentExample();
-		}
+	// myAssignmentExample();
+	// myDecisionExample();	
+		mySongExamples();
+	}
 	
+	public static void mySongExamples() {
+		SongExamples se = new SongExamples();
+		String beer = se.bottlesofBeer();
+		System.out.println(beer);
+	}
+
 	public static void myAssignmentExample() {
 		AssignmentExample ae = new AssignmentExample();
 		ae.plusEqualsExample();
@@ -28,6 +36,19 @@ public class WelcomeToJava {
 		ae.rightShiftEqualsExample();
 		ae.bitwiseAndEqualsExample();
 		ae.bitwiseOrEqualsExample();
+	}
+	
+	public static void myDecisionExample() {
+		DecisionExamples de = new DecisionExamples();
+		de.basicIfStatement();
+		de.chainIfStatement();
+		de.switchExample(6);
+		
+		LoopingExamples le = new LoopingExamples();
+		le.myWhileLoop();
+		le.myDoWhileLoop();
+		le.myForLoop();
+		le.myBranchExample();
 	}
 	
 	public static void myOperatorExample() {
