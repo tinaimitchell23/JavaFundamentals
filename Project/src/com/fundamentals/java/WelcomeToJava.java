@@ -11,7 +11,17 @@ WelcomeToJava - Name of class
 */
 public class WelcomeToJava {
 
+	public static final int MY_VALUE = 10;
+	public static int MY_OTHER_VALUE;
+	
+	static {
+		MY_OTHER_VALUE = 25;
+		int total = MY_VALUE * MY_OTHER_VALUE; // Total should be 250
+		System.out.println(total);
+	}
+
 	public static void main(String[] args) {
+		MY_OTHER_VALUE = 35;
 		// TODO Auto-generated method stub
 		// someMethod();
 		// stringExamples();
@@ -24,10 +34,47 @@ public class WelcomeToJava {
 		// quiz1();
 		// inheritanceExample();
 		// overloadExample();
-		overrideExample();
-		
+		// overrideExample();
+		sampleUtility();
+		// something(); // Can not run in a static method
+		// myAbstractExample
+		myInterfaceExample();
 	}
 	
+	public static void myInterfaceExample() {
+		House myHouse = new House();
+		Condo myCondo = new Condo();
+		
+		myHouse.decorate();
+		myHouse.installPlumbing();
+		myCondo.decorate();
+		myHouse.supplementWork();
+	}
+	
+	public static void myAbstractExample() {
+		// Can't created an instance of an Abstract class
+		// Shape shape = new Shape(); // Not valid
+		System.out.println( Shape.area(5, 10));
+		Square square = new Square();
+		System.out.println( square.draw());
+		Rectangle rec = new Rectangle();
+		System.out.println(rec.draw());
+		rec.setLength(10);
+		rec.setLength(5);
+		System.out.println(Shape.area(rec.getLength(), rec.getWidth()));
+		
+		MyOctagon mo = new MyOctagon();
+	}
+
+	public void something() {
+		// Will not run in a static method }
+	}
+
+	public static void sampleUtility() {
+		System.out.println(Utility.addSomething(5, 23));
+		Utility.somethingElse();
+	}
+
 	public static void overrideExample() {
 		House myHouse = new House();
 		Condo myCondo = new Condo();
@@ -36,14 +83,19 @@ public class WelcomeToJava {
 		// myCondo.openDoor();
 		myOtherhouse.openDoor();
 	}
-	
+
 	public static void overloadExample() {
 		Apple myApple = new Apple();
 		myApple.display("Granny Smiths", 5);
 		myApple.display("Sour", 3, "Red");
 		// String show = myApple.display("Granny Smiths", "Green");
 		System.out.println(myApple.display("Granny Smiths", "Green"));
-		
+
+		System.out.println(Apple.SOUR_SCALE);
+		System.out.println(myApple.SOUR_SCALE);
+		System.out.println(Apple.SWEET_SCALE);
+		Apple.SWEET_SCALE = 25;
+
 	}
 
 	public static void mySongExamples() {
@@ -51,7 +103,7 @@ public class WelcomeToJava {
 		String beer = se.bottlesofBeer();
 		System.out.println(beer);
 	}
-	
+
 	public static void inheritanceExample() {
 		House house = new House();
 		Condo condo = new Condo();
@@ -60,7 +112,7 @@ public class WelcomeToJava {
 		house.setDoors("Purple Door");
 		System.out.println(house.getDoors());
 	}
-	
+
 	public static void quiz1() {
 		Quiz1 myQuiz = new Quiz1();
 		// myQuiz.divisibleByThree();

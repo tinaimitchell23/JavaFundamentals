@@ -1,6 +1,19 @@
 package com.fundamentals.data;
 
 public class Apple {
+	public static final int SOUR_SCALE = 10;
+	public static int SWEET_SCALE = 20;
+	
+	int size = 1;
+	public String color = "Red";
+	
+	void myAppleMethod() {
+		System.out.println("My apple method");
+	}
+	
+	public void myAppleSecondMethod() {
+		System.out.println("My apple second method");
+	}
 	public void display(String type, int count) {
 		display(type, count, "Green");
 	}

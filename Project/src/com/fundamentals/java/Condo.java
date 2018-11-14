@@ -1,6 +1,6 @@
 package com.fundamentals.java;
 
-public class Condo extends House {
+public class Condo extends House implements HomeInterface {
 	private boolean hasBalcony;
 
 	public void sethasBalcony(boolean hasBalcony) {
@@ -17,4 +17,9 @@ public class Condo extends House {
 		System.out.println("I opened a wooden door");
 	}
 
+	@Override
+	public void decorate() {
+		// TODO Auto-generated method stub
+		System.out.println("Decorate Condo");
+	}
 }
