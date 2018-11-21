@@ -1,19 +1,25 @@
 package com.fundamentals.java;
 
-import java.util.Scanner;
-
+import java.util.*;
 import com.fundamentals.data.*;
+import com.fundamentals.data.HolidayDinner;
+import com.fundamentals.data.Apple;
 
 /*
 *public - Access Modifier
 *class - file type
 WelcomeToJava - Name of class
 */
+
+enum iceCream {
+	Vanilla, Chocolate, Strawberry, Carmel;
+}
+
 public class WelcomeToJava {
 
 	public static final int MY_VALUE = 10;
 	public static int MY_OTHER_VALUE;
-	
+
 	static {
 		MY_OTHER_VALUE = 25;
 		int total = MY_VALUE * MY_OTHER_VALUE; // Total should be 250
@@ -30,39 +36,135 @@ public class WelcomeToJava {
 		// myOperatorExample();
 		// myAssignmentExample();
 		// myDecisionExample();
-		mySongExamples();
+		// mySongExamples();
 		// quiz1();
 		// inheritanceExample();
 		// overloadExample();
 		// overrideExample();
-		sampleUtility();
+		// sampleUtility();
 		// something(); // Can not run in a static method
 		// myAbstractExample
-		myInterfaceExample();
+		// myInterfaceExample();
+		// myConstructorPlusExample();
+		// arrayListExamples();
+		// arrayListObjectExample();
+		// hashSetExamples();
+		// hashMapExample() ;
+		// enumSample1();
+		exceptionExample();
 	}
 	
-	public static void myInterfaceExample() {
-		House myHouse = new House();
-		Condo myCondo = new Condo();
+	public static void exceptionExample() {
+		ExceptionSample es = new ExceptionSample();
+		// es.myException();
+		// es.mySecondException();
+		es.myThirdException();
+	}
+
+	public static void enumSample1() {
+		iceCream ic = iceCream.Strawberry;
+		System.out.println(ic);
+		HolidayDinner hd = new HolidayDinner();
+		hd.letsEat();
+		hd.letsChoose(Dinner.Turkey);
+		hd.letsChoose(Dinner.Ham);
+		hd.letsChoose(Dinner.PumpkinPie);
 		
-		myHouse.decorate();
-		myHouse.installPlumbing();
-		myCondo.decorate();
-		myHouse.supplementWork();
+		Dinner d1 = Dinner.MashedPotatoes;
+		System.out.println(d1);
+		d1.readyNow();
 	}
-	
+
+	public static <E> void hashMapExample() {
+		HashMap<Integer, String> myMap = new HashMap<Integer, String>();
+		myMap.put(0, "Something");
+		myMap.put(1, "Something else");
+		myMap.put(2, "Something");
+		myMap.put(3, "One More");
+		myMap.remove(2);
+
+		for (String value : myMap.values()) {
+			System.out.println(value);
+		}
+		Set<E> set = (Set<E>) myMap.entrySet();
+		Iterator iterate = set.iterator();
+		while (iterate.hasNext()) {
+			Map.Entry me = (Map.Entry) iterate.next();
+			System.out.println(me.getKey() + " : ");
+			System.out.println(me.getValue());
+		}
+	}
+
+	/*
+	 * HashSet ignores duplicates and also order. If the item added is already in
+	 * the collection, it will not add it, or give any indication that it won't
+	 */
+	public static void hashSetExamples() {
+		HashSet<String> myString = new HashSet<String>();
+		myString.add("something");
+		myString.add("something else");
+		myString.add("something");
+		myString.add("something else");
+		
+		for(String s : myString) {
+			System.out.println(s);
+		}
+	}
+
+	public static void arrayListExamples() {
+		ArrayList<String> names = new ArrayList<String>();
+		names.add("something");
+		names.add("something else");
+		names.add("something");
+		names.remove(2);
+		names.add("Happy");
+		for (int i = 0; i < names.size(); i++) {
+			System.out.println(names.get(i));
+		}
+		for (String string : names) {
+			System.out.println(string);
+		}
+
+		// Recommend doing it with a generic parameter instead like above
+		ArrayList place = new ArrayList();
+		place.add(10);
+		place.add("type");
+	}
+
+	public static void myConstructorPlusExample() {
+		GrannySmiths gs = new GrannySmiths();
+		gs.decide();
+		TRex tr = new TRex("Sharp", "Smooth");
+		System.out.println("The TRex has " + tr.getSkin() + " skin and " + tr.getTeeth() + " teeth.");
+	}
+
+	public static void myInterfaceExample() {
+		// House myHouse = new House();
+		House mySummerHouse = new House("storm windows");
+		House myLogHouse = new House("wooden windows", "wooden door");
+		System.out.println(mySummerHouse.getWindows());
+		System.out.println(myLogHouse.getWindows() + " " + myLogHouse.getDoors());
+
+		Condo myCondo = new Condo("Sunny");
+
+		// myHouse.decorate();
+		// myHouse.installPlumbing();
+		// myCondo.decorate();
+		// myHouse.supplementWork();
+	}
+
 	public static void myAbstractExample() {
 		// Can't created an instance of an Abstract class
 		// Shape shape = new Shape(); // Not valid
-		System.out.println( Shape.area(5, 10));
+		System.out.println(Shape.area(5, 10));
 		Square square = new Square();
-		System.out.println( square.draw());
+		System.out.println(square.draw());
 		Rectangle rec = new Rectangle();
 		System.out.println(rec.draw());
 		rec.setLength(10);
 		rec.setLength(5);
 		System.out.println(Shape.area(rec.getLength(), rec.getWidth()));
-		
+
 		MyOctagon mo = new MyOctagon();
 	}
 
@@ -77,11 +179,11 @@ public class WelcomeToJava {
 
 	public static void overrideExample() {
 		House myHouse = new House();
-		Condo myCondo = new Condo();
-		House myOtherhouse = new Condo();
+		// Condo myCondo = new Condo();
+		// House myOtherhouse = new Condo();
 		// myHouse.openDoor();
 		// myCondo.openDoor();
-		myOtherhouse.openDoor();
+		// myOtherhouse.openDoor();
 	}
 
 	public static void overloadExample() {
@@ -106,7 +208,7 @@ public class WelcomeToJava {
 
 	public static void inheritanceExample() {
 		House house = new House();
-		Condo condo = new Condo();
+		Condo condo = new Condo("something");
 		condo.setDoors("Red Door");
 		System.out.println(condo.getDoors());
 		house.setDoors("Purple Door");
