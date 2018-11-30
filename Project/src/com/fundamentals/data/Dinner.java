@@ -11,5 +11,4 @@ public enum Dinner {
 		public void readyNow() {
 			System.out.println("Let's eat already.");
 		}
-
 }
