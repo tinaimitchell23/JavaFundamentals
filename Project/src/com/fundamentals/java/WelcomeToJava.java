@@ -1,9 +1,24 @@
 package com.fundamentals.java;
 
 import java.util.*;
+
+import com.designpatterns.base.BikeInterface;
+import com.designpatterns.base.BikeInterface.Color;
+import com.designpatterns.base.NarrowWheel;
+import com.designpatterns.base.RoadBike;
+import com.designpatterns.creational.AbstractBikeFactory;
+import com.designpatterns.creational.BikeBuilder;
+import com.designpatterns.creational.BikeDirector;
+import com.designpatterns.creational.BikeFrameInterface;
+import com.designpatterns.creational.BikeSeatInterface;
+import com.designpatterns.creational.RoadBikeBuilder;
+import com.designpatterns.creational.RoadBikeDirector;
+import com.designpatterns.creational.RoadBikeFactory;
+import com.designpatterns.creational.SerialNumberGenerator;
 import com.fundamentals.data.*;
 import com.fundamentals.data.HolidayDinner;
 import com.fundamentals.data.Apple;
+import com.designpatterns.base.TouringBike;
 
 /*
 *public - Access Modifier
@@ -27,6 +42,11 @@ public class WelcomeToJava {
 	}
 
 	public static void main(String[] args) {
+		creationalPatterns();
+	}
+		
+		
+	public static void fundamentalExamples() {
 		MY_OTHER_VALUE = 35;
 		// TODO Auto-generated method stub
 		// someMethod();
@@ -52,6 +72,30 @@ public class WelcomeToJava {
 		// hashMapExample() ;
 		// enumSample1();
 		exceptionExample();
+	}
+	
+	public static void creationalPatterns() {
+		// Abstract Factory
+		// String whatToMake = "roadBike";
+		AbstractBikeFactory factory = new RoadBikeFactory();
+		BikeFrameInterface frame = factory.createFrame();
+		BikeSeatInterface seat = factory.createBikeSeat();
+		System.out.println(frame.getFrameParts());
+		System.out.println(seat.getSeatParts());
+		
+		// Builder
+		RoadBike bike = new TouringBike(new NarrowWheel(22), Color.BLACK);
+		BikeBuilder builder = new RoadBikeBuilder(bike);
+		BikeDirector director = new RoadBikeDirector();
+		BikeInterface bikeInterface = director.build(builder);
+		System.out.println(bikeInterface);
+		
+		// Singleton
+		System.out.println("Generating Serial Numbers");
+		SerialNumberGenerator generator = SerialNumberGenerator.getInstance();
+		System.out.println("next serial " + generator.getNextSerial());
+		System.out.println("new serial " + generator.getNextSerial());
+		System.out.println("next serial " + generator.getNextSerial());
 	}
 	
 	public static void exceptionExample() {
