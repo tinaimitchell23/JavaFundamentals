@@ -5,4 +5,12 @@ public interface BikeInterface {
 	public WheelInterface getWheel();
 	public BikeInterface.Color getColor();
 	public void paint(BikeInterface.Color color);
+	public float getPrice();
+	
+	
+	public void cleanFrame();
+	public void airTires();
+	public void testRide();
+	
+	
 }

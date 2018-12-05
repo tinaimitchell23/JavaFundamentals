@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.designpatterns.base.BikeInterface;
 import com.designpatterns.base.BikeInterface.Color;
+import com.designpatterns.base.DownhillBike;
 import com.designpatterns.base.NarrowWheel;
 import com.designpatterns.base.RoadBike;
 import com.designpatterns.creational.AbstractBikeFactory;
@@ -15,10 +16,16 @@ import com.designpatterns.creational.RoadBikeBuilder;
 import com.designpatterns.creational.RoadBikeDirector;
 import com.designpatterns.creational.RoadBikeFactory;
 import com.designpatterns.creational.SerialNumberGenerator;
+import com.designpatterns.structural.BikeFacade;
+import com.designpatterns.structural.CustomGrips;
+import com.designpatterns.structural.GoldFrameBike;
+import com.designpatterns.structural.UltraWheel;
+import com.designpatterns.structural.UltraWheelAdapter;
 import com.fundamentals.data.*;
 import com.fundamentals.data.HolidayDinner;
 import com.fundamentals.data.Apple;
 import com.designpatterns.base.TouringBike;
+import com.designpatterns.base.WheelInterface;
 
 /*
 *public - Access Modifier
@@ -42,7 +49,10 @@ public class WelcomeToJava {
 	}
 
 	public static void main(String[] args) {
-		creationalPatterns();
+		// creationalPatterns();
+		// adapterPatterns();
+		// decoratorPattern();
+		facadePattern();
 	}
 		
 		
@@ -96,6 +106,34 @@ public class WelcomeToJava {
 		System.out.println("next serial " + generator.getNextSerial());
 		System.out.println("new serial " + generator.getNextSerial());
 		System.out.println("next serial " + generator.getNextSerial());
+	}
+	
+	public static void adapterPatterns() {
+		List<WheelInterface> wheels = new ArrayList<WheelInterface>();
+		UltraWheel ultraWheel = new UltraWheel(28);
+		wheels.add(new NarrowWheel(24));
+		wheels.add(new NarrowWheel(20));
+		wheels.add(new WideWheel(24));
+		wheels.add(new UltraWheelAdapter(ultraWheel));
+		for (WheelInterface wheel : wheels) {
+			System.out.println(wheel);
+		}
+	}
+	
+	public static void decoratorPattern() {
+		BikeInterface myTourBike = new TouringBike(new NarrowWheel(24));
+		System.out.println(myTourBike);
+		
+		myTourBike = new GoldFrameBike(myTourBike);
+		System.out.println(myTourBike);
+		
+		myTourBike = new CustomGrips(myTourBike);
+		System.out.println(myTourBike);
+	}
+	
+	public static void facadePattern() {
+		BikeFacade facade = new BikeFacade();
+		facade.prepareForSale(new DownhillBike(new WideWheel(24)));
 	}
 	
 	public static void exceptionExample() {
