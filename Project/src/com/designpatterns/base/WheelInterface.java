@@ -1,6 +1,8 @@
 package com.designpatterns.base;
 
-public interface WheelInterface {
+import com.designpatterns.behavioral.Visitable;
+
+public interface WheelInterface extends Visitable{
 	public int getSize();
 	public boolean isWide();
 

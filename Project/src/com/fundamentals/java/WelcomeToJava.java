@@ -26,6 +26,16 @@ import com.fundamentals.data.HolidayDinner;
 import com.fundamentals.data.Apple;
 import com.designpatterns.base.TouringBike;
 import com.designpatterns.base.WheelInterface;
+import com.designpatterns.behavioral.BikeGearBox;
+import com.designpatterns.behavioral.BikeSpeedMonitor;
+import com.designpatterns.behavioral.BikeSpeedometer;
+import com.designpatterns.behavioral.GearBox;
+import com.designpatterns.behavioral.MountainBikeRange;
+import com.designpatterns.behavioral.RoadBikeRange;
+import com.designpatterns.behavioral.SpeedMonitor;
+import com.designpatterns.behavioral.Speedometer;
+import com.designpatterns.behavioral.WheelDiagnostics;
+import com.designpatterns.behavioral.WheelInventory;
 
 /*
 *public - Access Modifier
@@ -52,10 +62,12 @@ public class WelcomeToJava {
 		// creationalPatterns();
 		// adapterPatterns();
 		// decoratorPattern();
-		facadePattern();
+		// facadePattern();
+		// adapterPattern();
+		// iteratorPatternV2();
+		observerPattern();
 	}
-		
-		
+
 	public static void fundamentalExamples() {
 		MY_OTHER_VALUE = 35;
 		// TODO Auto-generated method stub
@@ -83,7 +95,7 @@ public class WelcomeToJava {
 		// enumSample1();
 		exceptionExample();
 	}
-	
+
 	public static void creationalPatterns() {
 		// Abstract Factory
 		// String whatToMake = "roadBike";
@@ -92,23 +104,32 @@ public class WelcomeToJava {
 		BikeSeatInterface seat = factory.createBikeSeat();
 		System.out.println(frame.getFrameParts());
 		System.out.println(seat.getSeatParts());
-		
+
 		// Builder
 		RoadBike bike = new TouringBike(new NarrowWheel(22), Color.BLACK);
 		BikeBuilder builder = new RoadBikeBuilder(bike);
 		BikeDirector director = new RoadBikeDirector();
 		BikeInterface bikeInterface = director.build(builder);
 		System.out.println(bikeInterface);
-		
+
 		// Singleton
 		System.out.println("Generating Serial Numbers");
 		SerialNumberGenerator generator = SerialNumberGenerator.getInstance();
 		System.out.println("next serial " + generator.getNextSerial());
 		System.out.println("new serial " + generator.getNextSerial());
 		System.out.println("next serial " + generator.getNextSerial());
+
 	}
-	
-	public static void adapterPatterns() {
+
+	public static void iteratorPatternV2() {
+		System.out.println("=== Our Road Bikes");
+		RoadBikeRange bikeRange = new RoadBikeRange();
+		for (BikeInterface bikes : bikeRange.getRange()) {
+			System.out.println(bikes);
+		}
+	}
+
+	public static void adapterPattern() {
 		List<WheelInterface> wheels = new ArrayList<WheelInterface>();
 		UltraWheel ultraWheel = new UltraWheel(28);
 		wheels.add(new NarrowWheel(24));
@@ -119,23 +140,71 @@ public class WelcomeToJava {
 			System.out.println(wheel);
 		}
 	}
+
+	public static void iteratorPattern() {
+		System.out.println("=== Our Road Bikes ===");
+		RoadBikeRange bikeRange = new RoadBikeRange();
+		printIterator(bikeRange.iterator());
+		System.out.println("=== Our Mountain Bikes===");
+		MountainBikeRange mountainBikeRange = new MountainBikeRange();
+		printIterator(mountainBikeRange.iterator());
+	}
+
+	public static void printIterator(Iterator iter) {
+		while (iter.hasNext()) {
+			System.out.println(iter.next());
+		}
+	}
+
+	public static void observerPattern() {
+		// Create the Speed Monitor
+		SpeedMonitor monitor = new SpeedMonitor();
+		// Create a speedometer and register the monitor to it.
+		Speedometer speedo = new Speedometer();
+		speedo.addObserver(monitor);
+		speedo.addObserver(new GearBox());
+
+		// Pedal at different speeds
+		speedo.setCurrentSpeed(5);
+		speedo.setCurrentSpeed(10);
+		speedo.setCurrentSpeed(20);
+		speedo.setCurrentSpeed(30);
+		speedo.setCurrentSpeed(35);
+
+	}
+
+	public static void observerPatternV2() {
+		BikeSpeedometer speedo = new BikeSpeedometer();
+		speedo.addSpeedometerListener(new BikeSpeedMonitor());
+		speedo.addSpeedometerListener(new BikeGearBox());
+	}
 	
+	public static void visitorPattern() {
+		WheelInterface wheel = new WideWheel(24);
+		
+		// Run Diagnostics
+		wheel.acceptVisitor(new WheelDiagnostics());
+		
+		// Run Inventory
+		wheel.acceptVisitor(new WheelInventory());
+	}
+
 	public static void decoratorPattern() {
 		BikeInterface myTourBike = new TouringBike(new NarrowWheel(24));
 		System.out.println(myTourBike);
-		
+
 		myTourBike = new GoldFrameBike(myTourBike);
 		System.out.println(myTourBike);
-		
+
 		myTourBike = new CustomGrips(myTourBike);
 		System.out.println(myTourBike);
 	}
-	
+
 	public static void facadePattern() {
 		BikeFacade facade = new BikeFacade();
 		facade.prepareForSale(new DownhillBike(new WideWheel(24)));
 	}
-	
+
 	public static void exceptionExample() {
 		ExceptionSample es = new ExceptionSample();
 		// es.myException();
@@ -151,7 +220,7 @@ public class WelcomeToJava {
 		hd.letsChoose(Dinner.Turkey);
 		hd.letsChoose(Dinner.Ham);
 		hd.letsChoose(Dinner.PumpkinPie);
-		
+
 		Dinner d1 = Dinner.MashedPotatoes;
 		System.out.println(d1);
 		d1.readyNow();
@@ -187,8 +256,8 @@ public class WelcomeToJava {
 		myString.add("something else");
 		myString.add("something");
 		myString.add("something else");
-		
-		for(String s : myString) {
+
+		for (String s : myString) {
 			System.out.println(s);
 		}
 	}
